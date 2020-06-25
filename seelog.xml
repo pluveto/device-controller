@@ -1,0 +1,16 @@
+<!-- 我只需要把日志按指定格式输出到终端 -->
+<seelog type="asynctimer" asyncinterval="1000000" minlevel="debug" maxlevel="error">
+    <outputs formatid="main">
+        <!-- 输出到终端 -->
+        <console/>
+        <!-- 输出到文件，且不同于终端的日志格式 -->
+        <splitter formatid="file">
+            <file path="log/all.log"/>
+        </splitter>
+    </outputs>
+    <formats>
+        <!-- 设置格式 -->
+        <format id="main" format="[%LEV] %Msg%n"/>
+        <format id="file" format="%UTCDate %UTCTime - [%LEV] - %RelFile:%Line - %Msg%n"/>
+    </formats>
+</seelog>
