@@ -30,6 +30,7 @@ func GetClientInfo() (*ClientInfo, error) {
 		os.Exit(1)
 	}
 	//fmt.Println("Body       :\n", resp)
+	log.Infof("Basic Info       :\n%s", resp)
 	ret := &ClientInfo{}
 	json.Unmarshal(resp.Body(), &ret)
 	return ret, nil
@@ -37,22 +38,24 @@ func GetClientInfo() (*ClientInfo, error) {
 
 type ClientInfo struct {
 	User struct {
-		ID int `json:"id"`
-		Interval int `json:"interval"`
-		Name string `json:"name"`
+		ID       int    `json:"id"`
+		Interval int    `json:"interval"`
+		Name     string `json:"name"`
 	} `json:"user"`
-	Sensors []struct {
-		ID           int     `json:"id"`
-		MeterType    string  `json:"meterType"`
-		Enabled      bool    `json:"enabled"`
-		DeviceAddr   int     `json:"deviceAddr"`
-		Gas          string  `json:"gas"`
-		Max          float64 `json:"max"`
-		Min          float64 `json:"min"`
-		MessureRange string  `json:"messureRange"`
-		LocalAddr    string  `json:"localAddr"`
-		Building     string  `json:"building"`
-		Floor        string  `json:"floor"`
-		Alias        string  `json:"alias"`
-	} `json:"sensors"`
+	Sensors []Sensor `json:"sensors"`
+}
+
+type Sensor struct {
+	ID           int     `json:"id"`
+	MeterType    string  `json:"meterType"`
+	Enabled      bool    `json:"enabled"`
+	DeviceAddr   uint8   `json:"deviceAddr"`
+	Gas          string  `json:"gas"`
+	Max          float64 `json:"max"`
+	Min          float64 `json:"min"`
+	MessureRange string  `json:"messureRange"`
+	LocalAddr    string  `json:"localAddr"`
+	Building     string  `json:"building"`
+	Floor        string  `json:"floor"`
+	Alias        string  `json:"alias"`
 }
