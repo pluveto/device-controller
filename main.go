@@ -31,4 +31,6 @@ func main() {
 	}
 	log.Info(fmt.Sprintf("Basic info loaded (%v devices). Name: %s", len(BasicInfo.Sensors), BasicInfo.User.Name))
 	// 启用定时询查
+	go RunService()
+	select {}
 }

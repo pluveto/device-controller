@@ -37,6 +37,8 @@ func GetClientInfo() (*ClientInfo, error) {
 
 type ClientInfo struct {
 	User struct {
+		ID int `json:"id"`
+		Interval int `json:"interval"`
 		Name string `json:"name"`
 	} `json:"user"`
 	Sensors []struct {

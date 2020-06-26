@@ -10,7 +10,7 @@
     </outputs>
     <formats>
         <!-- 设置格式 -->
-        <format id="main" format="[%LEV] %Msg%n"/>
+        <format id="main" format="[%LEV] %UTCTime %Msg%n"/>
         <format id="file" format="%UTCDate %UTCTime - [%LEV] - %RelFile:%Line - %Msg%n"/>
     </formats>
 </seelog>
