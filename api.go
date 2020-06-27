@@ -7,6 +7,7 @@ import (
 	log "github.com/cihub/seelog"
 )
 
+// GetClientInfo 获取客户端信息
 func GetClientInfo() (*ClientInfo, error) {
 	if nil == Conf {
 		log.Error("Config is not loaded!")
@@ -36,6 +37,7 @@ func GetClientInfo() (*ClientInfo, error) {
 	return ret, nil
 }
 
+// ClientInfo 客户端信息
 type ClientInfo struct {
 	User struct {
 		ID       int    `json:"id"`
@@ -45,6 +47,7 @@ type ClientInfo struct {
 	Sensors []Sensor `json:"sensors"`
 }
 
+// Sensor 传感器配置
 type Sensor struct {
 	ID           int     `json:"id"`
 	MeterType    string  `json:"meterType"`

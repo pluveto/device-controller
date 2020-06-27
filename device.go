@@ -26,10 +26,11 @@ func GetSensorByPortDeviceAddr(port int, deviceAddr byte) (Sensor, error) {
 	for _, sensor := range BasicInfo.Sensors {
 		sensorPort := str.GetPortFromAddr(sensor.LocalAddr)
 		//log.Debugf("connect port %v, sensorPort %v", port, sensorPort)
-
 		if port == sensorPort && sensor.DeviceAddr == deviceAddr {
 			return sensor, nil
 		}
 	}
-	return Sensor{}, fmt.Errorf("Sensor device not found by port %v and addr %x", port, deviceAddr)
+	return Sensor{},
+		fmt.Errorf("Sensor device not found by port %v and addr %x",
+			port, deviceAddr)
 }
