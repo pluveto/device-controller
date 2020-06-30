@@ -24,7 +24,7 @@ func GetClientInfo() (*ClientInfo, error) {
 		EnableTrace().
 		SetHeader("Accept", "application/json").
 		SetAuthToken(Conf.AuthKey).
-		Get(Conf.API + "/config")
+		Get(Conf.API + "/device_controller/client_config")
 	if err != nil {
 		//return nil, err
 		log.Error("Failed to get devices info!")
@@ -37,28 +37,44 @@ func GetClientInfo() (*ClientInfo, error) {
 	return ret, nil
 }
 
-// ClientInfo 客户端信息
+// ClientInfo ...
 type ClientInfo struct {
-	User struct {
-		ID       int    `json:"id"`
-		Interval int    `json:"interval"`
-		Name     string `json:"name"`
-	} `json:"user"`
-	Sensors []Sensor `json:"sensors"`
+	UserInfo      UserInfo      `json:"userInfo"`
+	SensorConfigs SensorConfigs `json:"sensorConfigs"`
 }
 
-// Sensor 传感器配置
-type Sensor struct {
-	ID           int     `json:"id"`
-	MeterType    string  `json:"meterType"`
-	Enabled      bool    `json:"enabled"`
-	DeviceAddr   uint8   `json:"deviceAddr"`
-	Gas          string  `json:"gas"`
-	Max          float64 `json:"max"`
-	Min          float64 `json:"min"`
-	MessureRange string  `json:"messureRange"`
-	LocalAddr    string  `json:"localAddr"`
-	Building     string  `json:"building"`
-	Floor        string  `json:"floor"`
-	Alias        string  `json:"alias"`
+// UserInfo ...
+type UserInfo struct {
+	ID          string   `json:"id"`
+	Username    string   `json:"username"`
+	ScreenName  string   `json:"screenName"`
+	Email       string   `json:"email"`
+	Avatar      string   `json:"avatar"`
+	Permissions []string `json:"permissions"`
+}
+
+// SensorConfig ...
+type SensorConfig struct {
+	ID           string      `json:"id"`
+	UserID       string      `json:"userId"`
+	Cycle        string      `json:"cycle"`
+	MeterType    string      `json:"meterType"`
+	MeasureRange string      `json:"measureRange"`
+	LocalAddr    string      `json:"localAddr"`
+	DeviceAddr   string      `json:"deviceAddr"`
+	Content      string      `json:"content"`
+	LimitMax     string      `json:"limitMax"`
+	LimitMin     string      `json:"limitMin"`
+	Dot          string      `json:"dot"`
+	Enabled      string      `json:"enabled"`
+	Alias        interface{} `json:"alias"`
+	Unit         string      `json:"unit"`
+}
+
+// SensorConfigs ...
+type SensorConfigs struct {
+	Page    int    `json:"page"`
+	Perpage int    `json:"perpage"`
+	Total   int    `json:"total"`
+	Data    []SensorConfig `json:"data"`
 }
