@@ -7,7 +7,7 @@ import (
 
 type Config struct {
 	API     string `json:"api"`
-	AuthKey string `json:"authKey"`
+	AuthKey string `json:"accessKey"`
 }
 
 func loadConfig(fileName string) (*Config, error) {

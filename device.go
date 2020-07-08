@@ -7,14 +7,14 @@ import (
 )
 
 // GetSensorsByPort 获取某个端口下的所有设备
-func GetSensorsByPort(port int) []Sensor {
-	var ret []Sensor
-	for _, sensor := range BasicInfo.Sensors {
-		sensorPort := str.GetPortFromAddr(sensor.LocalAddr)
+func GetSensorsByPort(port int) []SensorConfig {
+	var ret []SensorConfig
+	for _, sensorConfig := range BasicInfo.SensorConfigs {
+		sensorPort := str.GetPortFromAddr(sensorConfig.LocalAddr)
 		//log.Debugf("connect port %v, sensorPort %v", port, sensorPort)
 
 		if port == sensorPort {
-			ret = append(ret, sensor)
+			ret = append(ret, sensorConfig)
 		}
 	}
 
@@ -22,15 +22,15 @@ func GetSensorsByPort(port int) []Sensor {
 }
 
 // GetSensorByPortDeviceAddr 通过设备地址和端口号获取设备
-func GetSensorByPortDeviceAddr(port int, deviceAddr byte) (Sensor, error) {
-	for _, sensor := range BasicInfo.Sensors {
-		sensorPort := str.GetPortFromAddr(sensor.LocalAddr)
+func GetSensorByPortDeviceAddr(port int, deviceAddr byte) (SensorConfig, error) {
+	for _, sensorConfig := range BasicInfo.SensorConfigs {
+		sensorPort := str.GetPortFromAddr(sensorConfig.LocalAddr)
 		//log.Debugf("connect port %v, sensorPort %v", port, sensorPort)
-		if port == sensorPort && sensor.DeviceAddr == deviceAddr {
-			return sensor, nil
+		if port == sensorPort && byte(sensorConfig.DeviceAddr) == deviceAddr {
+			return sensorConfig, nil
 		}
 	}
-	return Sensor{},
+	return SensorConfig{},
 		fmt.Errorf("Sensor device not found by port %v and addr %x",
 			port, deviceAddr)
 }

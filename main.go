@@ -29,7 +29,7 @@ func main() {
 		log.Error("Failed to load client info!")
 		return
 	}
-	log.Info(fmt.Sprintf("Basic info loaded (%v devices). Name: %s", len(BasicInfo.Sensors), BasicInfo.User.Name))
+	log.Info(fmt.Sprintf("Basic info loaded (%v devices). Name: %s", len(BasicInfo.SensorConfigs), BasicInfo.UserInfo.ScreenName))
 	// 启用定时询查
 	go RunService()
 	select {}
